@@ -1,0 +1,55 @@
+CREATE OR REPLACE TRIGGER emp_trig1 AFTER INSERT on emp
+BEGIN 
+DBMS_OUTPUT.PUT_LINE('record inserted');
+END;
+
+
+
+DESC emp;
+
+insert into emp(EMPNO,NAME,SALARY,DEPTNO,DESIGNATION) values(3,'mohit',25000,13,'devloper');
+select * from emp;
+select * from USER_TRIGGERS;
+drop trigger updatedept;
+
+
+
+
+create or replace trigger update_trigger after update on emp 
+for each row 
+when(new.SALARY-old.SALARY>2000)
+
+BEGIN
+
+dbms_output.put_line('old salary'||:old.SALARY);
+
+dbms_output.put_line('old salary'||:new.SALARY);
+
+END;
+
+
+update emp set SALARY=30000 where EMPNO=3;
+
+
+select * from emp;
+select * from dept;
+
+
+
+insert into emp values(5,'jay',15000,5,'Marketing');
+
+
+
+create or replace trigger sal_trig after delete on emp
+
+for each row
+
+
+BEGIN
+
+update dept set DEPTNO=:old.DEPTNO-1 where NAME='Marketing';
+
+
+END;
+
+delete from emp where EMPNO=5

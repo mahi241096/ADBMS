@@ -1,0 +1,66 @@
+practical-3
+
+1)
+Declare
+empn number;
+eno number;
+esal number;
+hra number;
+da number;
+net number;
+
+Begin
+empn:=:Enter;
+select EMPNO,SALARY into eno,esal from emp where EMPNO=empn;
+dbms_output.put_line('emp no:'||eno);
+dbms_output.put_line('emp Salary is:'||esal);
+hra:=esal*0.1;
+dbms_output.put_line('hra is:'||hra);
+da:=esal*0.6;
+dbms_output.put_line('da is:'||da);
+net:=esal+hra+da;
+dbms_output.put_line('Net Salary is:'||net);
+
+End;
+
+
+2)
+Declare
+empn number;
+eno number;
+esal number;
+
+Begin
+empn:=:Enter;
+select EMPNO,SALARY into eno,esal from emp where EMPNO=empn;
+dbms_output.put_line('emp no:'||eno);
+dbms_output.put_line('emp Salary is:'||esal);
+if esal>10000  then
+ dbms_output.put_line('medium');
+elsif esal >30000 then
+ dbms_output.put_line('high salary');
+elsif esal >60000 then
+ dbms_output.put_line('very high salary');
+end if;
+
+End;
+
+
+5)
+Declare 
+psal number;
+id number;
+sal number;
+ldate date;
+
+Begin 
+ldate:=to_char(SYSDATE,'DD-MON-YY');
+psal:=:Salary;
+update product_master1 set price=psal where product_no='P00001';
+select price into sal from product_master1 where product_no='P00001';
+dbms_output.put_line('emp sal:'||sal);
+if sal>4000 then
+update old_price set new_price=sal,change_date=ldate where prod_id='P00001';
+end if;
+
+End;
